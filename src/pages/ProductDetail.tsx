@@ -45,7 +45,11 @@ export default function ProductDetail() {
         <div className="bg-white rounded-3xl overflow-hidden border border-line">
           <div className="relative">
             {currentImage ? (
-              <img src={currentImage.image_url} alt={product.name} className="w-full h-64 md:h-80 object-cover" />
+              <img
+                src={currentImage.image_url}
+                alt={product.name}
+                className="w-full h-64 md:h-80 object-contain bg-creamsoft"
+              />
             ) : (
               <ProductPhoto product={product} className="w-full h-64 md:h-80" />
             )}

@@ -72,8 +72,8 @@ export function ImageUploader({
     <div>
       <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-3">
         {sorted.map((img, i) => (
-          <div key={img.id} className="relative rounded-xl overflow-hidden border border-line aspect-square group">
-            <img src={img.image_url} alt="" className="w-full h-full object-cover" />
+          <div key={img.id} className="relative rounded-xl overflow-hidden border border-line aspect-square group bg-creamsoft">
+            <img src={img.image_url} alt="" className="w-full h-full object-contain" />
             <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/40 transition-colors flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100">
               <button
                 type="button"
