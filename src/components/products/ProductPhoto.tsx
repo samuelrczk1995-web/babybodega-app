@@ -8,8 +8,8 @@ export function ProductPhoto({ product, className = "" }: { product: Product; cl
 
   if (image) {
     return (
-      <div className={`relative overflow-hidden ${className}`}>
-        <img src={image.image_url} alt={product.name} className="w-full h-full object-cover" />
+      <div className={`relative overflow-hidden bg-creamsoft ${className}`}>
+        <img src={image.image_url} alt={product.name} className="w-full h-full object-contain" />
         {!product.is_available && (
           <div className="absolute inset-0 flex items-center justify-center bg-cream/60">
             <span className="px-3 py-1 text-sm font-medium rounded-full bg-ink text-cream">No disponible</span>
