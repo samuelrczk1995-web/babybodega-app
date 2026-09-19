@@ -7,6 +7,7 @@ import { ProductPhoto } from "../components/products/ProductPhoto";
 import { useProduct } from "../hooks/useProducts";
 import { useSettings } from "../hooks/useSettings";
 import { money, discountPct, buildWhatsAppLink } from "../lib/whatsapp";
+import { trackEvent } from "../lib/analytics";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -110,7 +111,11 @@ export default function ProductDetail() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => {
-                if (!product.is_available || !whatsappNumber) e.preventDefault();
+                if (!product.is_available || !whatsappNumber) {
+                  e.preventDefault();
+                  return;
+                }
+                trackEvent("whatsapp_click", { productId: product.id, pagePath: "product_detail" });
               }}
               className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-base font-semibold ${
                 product.is_available && whatsappNumber ? "bg-whatsapp text-white" : "bg-creamsoft text-inksoft cursor-not-allowed"

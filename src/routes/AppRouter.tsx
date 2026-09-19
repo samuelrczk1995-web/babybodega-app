@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 
 import Dashboard from "../pages/admin/Dashboard";
+import Statistics from "../pages/admin/Statistics";
 import ProductsList from "../pages/admin/ProductsList";
 import ProductNew from "../pages/admin/ProductNew";
 import ProductEdit from "../pages/admin/ProductEdit";
@@ -38,6 +39,14 @@ export default function AppRouter() {
         element={
           <RequireAuth>
             <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/admin/estadisticas"
+        element={
+          <RequireAuth>
+            <Statistics />
           </RequireAuth>
         }
       />

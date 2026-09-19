@@ -6,6 +6,7 @@ import { ProductGrid } from "../components/products/ProductGrid";
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { CATEGORY_ICONS } from "../components/products/categoryIcons";
+import { trackEvent } from "../lib/analytics";
 
 export default function Catalog() {
   const [params, setParams] = useSearchParams();
@@ -46,7 +47,10 @@ export default function Catalog() {
             return (
               <button
                 key={cat.id}
-                onClick={() => setParams((p) => { p.set("categoria", cat.slug); return p; })}
+                onClick={() => {
+                  trackEvent("category_click", { categorySlug: cat.slug, pagePath: "catalogo" });
+                  setParams((p) => { p.set("categoria", cat.slug); return p; });
+                }}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 border border-line ${
                   active ? "bg-ink text-cream" : "bg-white text-ink"
                 }`}

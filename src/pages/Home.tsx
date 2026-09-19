@@ -6,6 +6,7 @@ import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { useSettings } from "../hooks/useSettings";
 import { CATEGORY_ICONS } from "../components/products/categoryIcons";
+import { trackEvent } from "../lib/analytics";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ export default function Home() {
                 href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("whatsapp_click", { pagePath: "home_hero" })}
                 className="px-6 py-3 rounded-full text-sm font-semibold border border-ink text-ink"
               >
                 Escribir por WhatsApp
@@ -62,7 +64,10 @@ export default function Home() {
             return (
               <button
                 key={cat.id}
-                onClick={() => navigate(`/categoria/${cat.slug}`)}
+                onClick={() => {
+                  trackEvent("category_click", { categorySlug: cat.slug, pagePath: "home" });
+                  navigate(`/categoria/${cat.slug}`);
+                }}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0 bg-white border border-line text-ink"
               >
                 <Icon size={16} />

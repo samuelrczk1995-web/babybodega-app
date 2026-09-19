@@ -5,6 +5,7 @@ import { money, discountPct, effectivePrice, buildWhatsAppLink } from "../../lib
 import { Badge } from "./Badge";
 import { ProductPhoto } from "./ProductPhoto";
 import { useSettings } from "../../hooks/useSettings";
+import { trackEvent } from "../../lib/analytics";
 
 export function ProductCard({ product }: { product: Product }) {
   const { whatsappNumber } = useSettings();
@@ -54,7 +55,11 @@ export function ProductCard({ product }: { product: Product }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => {
-            if (!product.is_available || !whatsappNumber) e.preventDefault();
+            if (!product.is_available || !whatsappNumber) {
+              e.preventDefault();
+              return;
+            }
+            trackEvent("whatsapp_click", { productId: product.id, pagePath: "product_card" });
           }}
           className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-full text-sm font-semibold ${
             product.is_available && whatsappNumber

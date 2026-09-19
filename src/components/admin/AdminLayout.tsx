@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Package, Tags, Award, Users, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, Tags, Award, Users, Settings, LogOut, BarChart3 } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import { useProfile } from "../../hooks/useProfile";
 
 const NAV_ITEMS = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/admin/estadisticas", label: "Estadísticas", icon: BarChart3 },
   { to: "/admin/productos", label: "Productos", icon: Package },
   { to: "/admin/categorias", label: "Categorías", icon: Tags },
   { to: "/admin/marcas", label: "Marcas", icon: Award },

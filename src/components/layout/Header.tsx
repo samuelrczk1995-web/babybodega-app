@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Baby, MessageCircle } from "lucide-react";
 import { useSettings } from "../../hooks/useSettings";
+import { trackEvent } from "../../lib/analytics";
 
 export function Header() {
   const { whatsappNumber } = useSettings();
@@ -32,6 +33,7 @@ export function Header() {
           href={`https://wa.me/${whatsappNumber}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent("whatsapp_click", { pagePath: "header" })}
           className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-whatsapp text-white"
         >
           <MessageCircle size={16} />
