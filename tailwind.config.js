@@ -4,22 +4,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: "#FBF7F1",
-        creamsoft: "#F5EEE2",
-        ink: "#211F1C",
-        inksoft: "#5B5750",
-        sage: "#8CB9AA",
-        sagedark: "#5E9280",
-        amber: "#E8A33D",
-        amberdark: "#C4801F",
-        blush: "#EFDFCB",
+        // Estos colores leen variables CSS (definidas en src/index.css) para poder
+        // cambiar entre el tema normal y el tema Black Friday sin tocar componentes.
+        cream: "rgb(var(--c-cream) / <alpha-value>)",
+        creamsoft: "rgb(var(--c-creamsoft) / <alpha-value>)",
+        ink: "rgb(var(--c-ink) / <alpha-value>)",
+        inksoft: "rgb(var(--c-inksoft) / <alpha-value>)",
+        sage: "rgb(var(--c-sage) / <alpha-value>)",
+        sagedark: "rgb(var(--c-sagedark) / <alpha-value>)",
+        amber: "rgb(var(--c-amber) / <alpha-value>)",
+        amberdark: "rgb(var(--c-amberdark) / <alpha-value>)",
+        blush: "rgb(var(--c-blush) / <alpha-value>)",
+        line: "rgb(var(--c-line) / <alpha-value>)",
+        onsage: "rgb(var(--c-onsage) / <alpha-value>)",
+        onamber: "rgb(var(--c-onamber) / <alpha-value>)",
         whatsapp: "#25D366",
         whatsappdark: "#1DA851",
-        line: "#E4DACB",
       },
       fontFamily: {
         heading: ["Fredoka", "sans-serif"],
         body: ["Inter", "sans-serif"],
+        display: ["Anton", "Impact", "sans-serif"],
       },
       borderRadius: {
         card: "20px",

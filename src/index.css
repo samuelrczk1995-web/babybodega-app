@@ -2,16 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+/* ------------------------------------------------------------------
+   COLORES DEL SITIO (tema normal)
+   Cada valor es "R G B" para que Tailwind pueda aplicar transparencias.
+------------------------------------------------------------------- */
+:root {
+  --c-cream: 251 247 241;
+  --c-creamsoft: 245 238 226;
+  --c-ink: 33 31 28;
+  --c-inksoft: 91 87 80;
+  --c-sage: 140 185 170;
+  --c-sagedark: 94 146 128;
+  --c-amber: 232 163 61;
+  --c-amberdark: 196 128 31;
+  --c-blush: 239 223 203;
+  --c-line: 228 218 203;
+  --c-onsage: 33 31 28;
+  --c-onamber: 33 31 28;
+  --c-card: 255 255 255;
+}
+
+/* ------------------------------------------------------------------
+   TEMA BLACK FRIDAY
+   Solo se activa dentro de las páginas públicas cuando el administrador
+   enciende "Modo Black Friday" en Admin → Configuración.
+------------------------------------------------------------------- */
+[data-theme="blackfriday"] {
+  --c-cream: 5 10 11;
+  --c-creamsoft: 12 22 24;
+  --c-ink: 244 250 250;
+  --c-inksoft: 156 180 182;
+  --c-sage: 25 201 193;
+  --c-sagedark: 45 226 214;
+  --c-amber: 225 6 0;
+  --c-amberdark: 255 82 82;
+  --c-blush: 8 38 40;
+  --c-line: 25 60 62;
+  --c-onsage: 3 16 15;
+  --c-onamber: 255 255 255;
+  --c-card: 11 24 26;
+}
+
+[data-theme="blackfriday"] .bg-white {
+  background-color: rgb(var(--c-card));
+}
+
+html,
+body,
+#root {
   height: 100%;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  background: #FBF7F1;
-  color: #211F1C;
+  background: rgb(var(--c-cream));
+  color: rgb(var(--c-ink));
 }
 
-h1, h2, h3, .font-heading {
+h1,
+h2,
+h3,
+.font-heading {
   font-family: "Fredoka", sans-serif;
+}
+
+.font-display {
+  font-family: "Anton", Impact, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------------
+   DECORACIÓN BLACK FRIDAY
+------------------------------------------------------------------- */
+.bf-bar {
+  background: #e10600;
+  color: #fff;
+  text-align: center;
+  font-family: "Anton", Impact, sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+}
+
+.bf-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 108%, rgba(25, 201, 193, 0.55), transparent 70%),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 54px,
+      rgba(25, 201, 193, 0.2) 54px,
+      rgba(25, 201, 193, 0.2) 57px,
+      transparent 57px,
+      transparent 118px
+    ),
+    linear-gradient(180deg, #030707 0%, #061416 100%);
+}
+
+/* Niebla cian en la parte baja del hero */
+.bf-hero::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -20%;
+  height: 55%;
+  background:
+    radial-gradient(ellipse 30% 60% at 15% 80%, rgba(25, 201, 193, 0.45), transparent 70%),
+    radial-gradient(ellipse 30% 60% at 50% 90%, rgba(25, 201, 193, 0.35), transparent 70%),
+    radial-gradient(ellipse 30% 60% at 85% 80%, rgba(25, 201, 193, 0.45), transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+  animation: bf-fog 7s ease-in-out infinite alternate;
+}
+
+@keyframes bf-fog {
+  from { opacity: 0.65; transform: translateY(6px); }
+  to   { opacity: 1;    transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-hero::after { animation: none; }
+}
+
+.bf-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.bf-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform: rotate(-4deg);
+}
+
+.bf-black,
+.bf-friday {
+  display: inline-block;
+  font-family: "Anton", Impact, sans-serif;
+  text-transform: uppercase;
+  line-height: 1;
+  transform: skewX(-10deg);
+}
+
+.bf-black {
+  background: #1fc8c8;
+  color: #050505;
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  padding: 0.12em 0.55em 0.08em;
+}
+
+.bf-friday {
+  background: #e10600;
+  color: #fff;
+  font-size: clamp(3.2rem, 10.5vw, 6.5rem);
+  padding: 0.1em 0.5em 0.06em;
+  margin-top: -0.06em;
+  margin-left: 0.9em;
+}
+
+.bf-pill {
+  display: inline-block;
+  background: #fff;
+  color: #211f1c;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  padding: 0.2em 1.2em;
+  border-radius: 999px;
+}
+
+.bf-pill span {
+  color: #4a9b88;
+}
+
+.bf-glow {
+  text-shadow: 0 0 24px rgba(25, 201, 193, 0.65);
 }

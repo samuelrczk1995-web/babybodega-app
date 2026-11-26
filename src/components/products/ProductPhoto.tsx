@@ -25,7 +25,7 @@ export function ProductPhoto({ product, className = "" }: { product: Product; cl
       className={`flex items-center justify-center relative overflow-hidden ${className}`}
       style={{ background: `linear-gradient(135deg, hsl(${seedHue}, 35%, 88%), #EFDFCB)` }}
     >
-      <Icon size={56} strokeWidth={1.3} className="text-inksoft" />
+      <Icon size={56} strokeWidth={1.3} className="text-[#5B5750]" />
       {!product.is_available && (
         <div className="absolute inset-0 flex items-center justify-center bg-cream/60">
           <span className="px-3 py-1 text-sm font-medium rounded-full bg-ink text-cream">No disponible</span>

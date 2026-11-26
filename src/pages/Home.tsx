@@ -7,46 +7,88 @@ import { useCategories } from "../hooks/useCategories";
 import { useSettings } from "../hooks/useSettings";
 import { CATEGORY_ICONS } from "../components/products/categoryIcons";
 import { trackEvent } from "../lib/analytics";
+import { useSiteTheme } from "../hooks/useSiteTheme";
 
 export default function Home() {
   const navigate = useNavigate();
   const { categories } = useCategories();
   const { whatsappNumber } = useSettings();
+  const { isBlackFriday } = useSiteTheme();
   const { products: featured } = useProducts({ featured: true, onlyAvailable: true });
   const { products: onSale } = useProducts({ onSale: true, onlyAvailable: true });
 
   return (
     <PublicLayout>
       {/* HERO */}
-      <section className="px-5 md:px-10 pt-10 md:pt-16 pb-10 grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
-        <div>
-          <h1 className="text-3xl md:text-5xl leading-tight mb-4 font-heading font-semibold text-ink">
-            Las mejores marcas para el cuidado de tu bebé en un solo lugar.
-          </h1>
-          <p className="text-base mb-6 text-inksoft max-w-md">
-            Compra segura a precios de bodega, elige tu producto y envíalo por WhatsApp.
-          </p>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => navigate("/productos")}
-              className="px-6 py-3 rounded-full text-sm font-semibold bg-ink text-cream"
-            >
-              Ver catálogo
-            </button>
-            {whatsappNumber && (
-              <a
-                href={`https://wa.me/${whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click", { pagePath: "home_hero" })}
-                className="px-6 py-3 rounded-full text-sm font-semibold border border-ink text-ink"
+      {isBlackFriday ? (
+        <section className="bf-hero px-5 md:px-10 py-12 md:py-20 mb-8">
+          <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+            <div className="bf-stack">
+              <span className="bf-black">Black</span>
+              <span className="bf-friday">Friday</span>
+            </div>
+            <p className="mt-8 mb-3 text-xl md:text-2xl font-heading font-semibold text-white">Ya llegó a</p>
+            <div className="bf-pill">
+              Baby <span>Bodega</span>
+            </div>
+            <p className="mt-8 font-display uppercase text-white bf-glow text-3xl md:text-6xl leading-tight">
+              Hasta <span className="text-sagedark">70%</span> de descuento
+            </p>
+            <p className="mt-3 mb-8 text-base text-white/80 max-w-md">
+              Aprovecha los mejores precios en coches, sillas de auto, sillas de comer y bicicletas.
+            </p>
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <button
+                onClick={() => navigate("/ofertas")}
+                className="px-7 py-3 rounded-full text-sm font-semibold bg-amber text-onamber"
               >
-                Escribir por WhatsApp
-              </a>
-            )}
+                Ver ofertas
+              </button>
+              {whatsappNumber && (
+                <a
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent("whatsapp_click", { pagePath: "home_hero" })}
+                  className="px-7 py-3 rounded-full text-sm font-semibold border border-sage text-sagedark"
+                >
+                  Escribir por WhatsApp
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="px-5 md:px-10 pt-10 md:pt-16 pb-10 grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
+          <div>
+            <h1 className="text-3xl md:text-5xl leading-tight mb-4 font-heading font-semibold text-ink">
+              Las mejores marcas para el cuidado de tu bebé en un solo lugar.
+            </h1>
+            <p className="text-base mb-6 text-inksoft max-w-md">
+              Compra segura a precios de bodega, elige tu producto y envíalo por WhatsApp.
+            </p>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate("/productos")}
+                className="px-6 py-3 rounded-full text-sm font-semibold bg-ink text-cream"
+              >
+                Ver catálogo
+              </button>
+              {whatsappNumber && (
+                <a
+                  href={`https://wa.me/${whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent("whatsapp_click", { pagePath: "home_hero" })}
+                  className="px-6 py-3 rounded-full text-sm font-semibold border border-ink text-ink"
+                >
+                  Escribir por WhatsApp
+                </a>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CATEGORIAS */}
       <section className="px-5 md:px-10 pb-10 max-w-6xl mx-auto">
@@ -98,7 +140,9 @@ export default function Home() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Tag size={20} className="text-amberdark" />
-                <h2 className="text-xl font-heading font-semibold text-ink">Ofertas</h2>
+                <h2 className="text-xl font-heading font-semibold text-ink">
+                  {isBlackFriday ? "Ofertas Black Friday" : "Ofertas"}
+                </h2>
               </div>
               <button onClick={() => navigate("/ofertas")} className="text-sm font-medium text-amberdark">
                 Ver todas

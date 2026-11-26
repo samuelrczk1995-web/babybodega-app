@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 export function Badge({ children, tone = "sage" }: { children: ReactNode; tone?: "sage" | "amber" | "ink" }) {
   const styles: Record<string, string> = {
-    sage: "bg-sage text-ink",
-    amber: "bg-amber text-ink",
+    sage: "bg-sage text-onsage",
+    amber: "bg-amber text-onamber",
     ink: "bg-ink text-cream",
   };
   return (
