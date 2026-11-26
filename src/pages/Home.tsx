@@ -10,7 +10,7 @@ import { trackEvent } from "../lib/analytics";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 
 // Cantidad de productos que se muestran en cada sección de la portada antes de "Ver todos".
-const HOME_PRODUCTS_LIMIT = 8;
+const HOME_PRODUCTS_LIMIT = 12;
 
 export default function Home() {
   const navigate = useNavigate();
