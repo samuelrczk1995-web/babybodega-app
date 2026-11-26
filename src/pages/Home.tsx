@@ -9,6 +9,9 @@ import { CATEGORY_ICONS } from "../components/products/categoryIcons";
 import { trackEvent } from "../lib/analytics";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 
+// Cantidad de productos que se muestran en cada sección de la portada antes de "Ver todos".
+const HOME_PRODUCTS_LIMIT = 8;
+
 export default function Home() {
   const navigate = useNavigate();
   const { categories } = useCategories();
@@ -129,7 +132,7 @@ export default function Home() {
               Ver todos
             </button>
           </div>
-          <ProductGrid products={featured.slice(0, 4)} />
+          <ProductGrid products={featured.slice(0, HOME_PRODUCTS_LIMIT)} />
         </section>
       )}
 
@@ -148,7 +151,7 @@ export default function Home() {
                 Ver todas
               </button>
             </div>
-            <ProductGrid products={onSale.slice(0, 4)} />
+            <ProductGrid products={onSale.slice(0, HOME_PRODUCTS_LIMIT)} />
           </div>
         </section>
       )}
