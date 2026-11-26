@@ -10,7 +10,7 @@ export function Header() {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-40 flex items-center justify-between px-5 md:px-10 py-4 bg-cream/90 backdrop-blur border-b border-line">
+    <header className="sticky top-0 z-40 flex flex-wrap items-center justify-between px-5 md:px-10 py-4 bg-cream/90 backdrop-blur border-b border-line">
       <Link to="/" className="flex items-center gap-2">
         <div className="w-9 h-9 rounded-full flex items-center justify-center bg-ink">
           <Baby size={18} className="text-cream" />
@@ -23,20 +23,15 @@ export function Header() {
         <button onClick={() => navigate("/productos")} className="hover:text-ink">
           Productos
         </button>
-        {isBlackFriday ? (
-          <button onClick={() => navigate("/destacados")} className="hover:text-ink">
-            Black Friday
-          </button>
-        ) : (
-          <>
-            <button onClick={() => navigate("/ofertas")} className="hover:text-ink">
-              Ofertas
-            </button>
-            <button onClick={() => navigate("/destacados")} className="hover:text-ink">
-              Destacados
-            </button>
-          </>
-        )}
+        <button onClick={() => navigate("/ofertas")} className="hover:text-ink">
+          Ofertas
+        </button>
+        <button
+          onClick={() => navigate("/destacados")}
+          className={isBlackFriday ? "font-semibold text-amberdark hover:text-ink" : "hover:text-ink"}
+        >
+          {isBlackFriday ? "Black Friday" : "Destacados"}
+        </button>
       </nav>
       {whatsappNumber && (
         <a
@@ -49,6 +44,30 @@ export function Header() {
           <MessageCircle size={16} />
           WhatsApp
         </a>
+      )}
+
+      {/* Menú para celular: solo durante la campaña Black Friday */}
+      {isBlackFriday && (
+        <nav className="md:hidden w-full order-last flex items-center gap-2 pt-3 overflow-x-auto">
+          <button
+            onClick={() => navigate("/productos")}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border border-line text-ink"
+          >
+            Productos
+          </button>
+          <button
+            onClick={() => navigate("/ofertas")}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border border-line text-ink"
+          >
+            Ofertas
+          </button>
+          <button
+            onClick={() => navigate("/destacados")}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-amber text-onamber"
+          >
+            Black Friday
+          </button>
+        </nav>
       )}
     </header>
   );

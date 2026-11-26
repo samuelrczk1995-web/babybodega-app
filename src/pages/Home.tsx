@@ -127,7 +127,9 @@ export default function Home() {
       {featured.length > 0 && (
         <section className="px-5 md:px-10 pb-10 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-heading font-semibold text-ink">Destacados</h2>
+            <h2 className="text-xl font-heading font-semibold text-ink">
+              {isBlackFriday ? "Black Friday" : "Destacados"}
+            </h2>
             <button onClick={() => navigate("/destacados")} className="text-sm font-medium text-sagedark">
               Ver todos
             </button>
@@ -143,9 +145,7 @@ export default function Home() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Tag size={20} className="text-amberdark" />
-                <h2 className="text-xl font-heading font-semibold text-ink">
-                  {isBlackFriday ? "Ofertas Black Friday" : "Ofertas"}
-                </h2>
+                <h2 className="text-xl font-heading font-semibold text-ink">Ofertas</h2>
               </div>
               <button onClick={() => navigate("/ofertas")} className="text-sm font-medium text-amberdark">
                 Ver todas

@@ -8,11 +8,13 @@ import { useProduct } from "../hooks/useProducts";
 import { useSettings } from "../hooks/useSettings";
 import { money, discountPct, buildWhatsAppLink } from "../lib/whatsapp";
 import { trackEvent } from "../lib/analytics";
+import { useSiteTheme } from "../hooks/useSiteTheme";
 
 export default function ProductDetail() {
   const { id } = useParams();
   const { product, loading } = useProduct(id);
   const { whatsappNumber } = useSettings();
+  const { isBlackFriday } = useSiteTheme();
   const [imgIndex, setImgIndex] = useState(0);
 
   if (loading) {
@@ -87,7 +89,7 @@ export default function ProductDetail() {
 
             <div className="flex items-center gap-2 mb-4">
               {product.is_on_sale && <Badge tone="amber">-{pct}% de descuento</Badge>}
-              {product.is_featured && <Badge tone="ink">Destacado</Badge>}
+              {product.is_featured && <Badge tone="ink">{isBlackFriday ? "Black Friday" : "Destacado"}</Badge>}
               <Badge tone={product.is_available ? "sage" : "ink"}>
                 {product.is_available ? "Disponible" : "No disponible"}
               </Badge>

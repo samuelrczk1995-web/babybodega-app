@@ -6,9 +6,11 @@ import { Badge } from "./Badge";
 import { ProductPhoto } from "./ProductPhoto";
 import { useSettings } from "../../hooks/useSettings";
 import { trackEvent } from "../../lib/analytics";
+import { useSiteTheme } from "../../hooks/useSiteTheme";
 
 export function ProductCard({ product }: { product: Product }) {
   const { whatsappNumber } = useSettings();
+  const { isBlackFriday } = useSiteTheme();
   const pct = discountPct(product);
 
   return (
@@ -18,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
           <ProductPhoto product={product} className="w-full h-44" />
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
             {product.is_on_sale && <Badge tone="amber">-{pct}%</Badge>}
-            {product.is_featured && <Badge tone="ink">Destacado</Badge>}
+            {product.is_featured && <Badge tone="ink">{isBlackFriday ? "Black Friday" : "Destacado"}</Badge>}
           </div>
         </div>
         <div className="p-4">
