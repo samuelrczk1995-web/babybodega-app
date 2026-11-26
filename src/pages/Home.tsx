@@ -42,10 +42,10 @@ export default function Home() {
             </p>
             <div className="flex items-center justify-center gap-3 flex-wrap">
               <button
-                onClick={() => navigate("/ofertas")}
+                onClick={() => navigate("/destacados")}
                 className="px-7 py-3 rounded-full text-sm font-semibold bg-amber text-onamber"
               >
-                Ver ofertas
+                Black Friday
               </button>
               {whatsappNumber && (
                 <a

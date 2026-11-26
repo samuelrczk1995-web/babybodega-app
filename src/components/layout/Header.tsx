@@ -2,9 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Baby, MessageCircle } from "lucide-react";
 import { useSettings } from "../../hooks/useSettings";
 import { trackEvent } from "../../lib/analytics";
+import { useSiteTheme } from "../../hooks/useSiteTheme";
 
 export function Header() {
   const { whatsappNumber } = useSettings();
+  const { isBlackFriday } = useSiteTheme();
   const navigate = useNavigate();
 
   return (
@@ -21,12 +23,20 @@ export function Header() {
         <button onClick={() => navigate("/productos")} className="hover:text-ink">
           Productos
         </button>
-        <button onClick={() => navigate("/ofertas")} className="hover:text-ink">
-          Ofertas
-        </button>
-        <button onClick={() => navigate("/destacados")} className="hover:text-ink">
-          Destacados
-        </button>
+        {isBlackFriday ? (
+          <button onClick={() => navigate("/destacados")} className="hover:text-ink">
+            Black Friday
+          </button>
+        ) : (
+          <>
+            <button onClick={() => navigate("/ofertas")} className="hover:text-ink">
+              Ofertas
+            </button>
+            <button onClick={() => navigate("/destacados")} className="hover:text-ink">
+              Destacados
+            </button>
+          </>
+        )}
       </nav>
       {whatsappNumber && (
         <a
